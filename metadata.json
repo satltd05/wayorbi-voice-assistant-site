@@ -1,0 +1,10 @@
+{
+  "name": "Wayorbi - Assistant de Voyage Vocal",
+  "description": "Assistant vocal intelligent et interactif dédié à Wayorbi, le réseau social de voyage. Découvrez les carnets, l'espace Explorer, le Travel DNA et la communauté.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
