@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Volume2, Square, Copy, Check, Compass, User, ExternalLink, Dna, BookOpen, Search, MessageCircle, ShieldCheck } from 'lucide-react';
+import { Volume2, Square, Copy, Check, User, ExternalLink, Dna, BookOpen, Search, MessageCircle, ShieldCheck, Compass } from 'lucide-react';
 import { ChatMessage } from '../types/assistant';
 import { WAYORBI_FEATURES } from '../data/wayorbiKnowledge';
+import { WayorbiLogoIcon } from './WayorbiLogo';
 
 interface ChatMessageItemProps {
   message: ChatMessage;
@@ -40,17 +41,17 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({
   const getFeatureIcon = (featureId?: string) => {
     switch (featureId) {
       case 'travel-dna':
-        return <Dna className="w-3.5 h-3.5 text-[#E07A5F]" />;
+        return <Dna className="w-3.5 h-3.5 text-purple-400" />;
       case 'carnets':
-        return <BookOpen className="w-3.5 h-3.5 text-[#F4A261]" />;
+        return <BookOpen className="w-3.5 h-3.5 text-blue-400" />;
       case 'explorer':
-        return <Search className="w-3.5 h-3.5 text-[#2A9D8F]" />;
+        return <Search className="w-3.5 h-3.5 text-sky-400" />;
       case 'messagerie':
-        return <MessageCircle className="w-3.5 h-3.5 text-sky-400" />;
+        return <MessageCircle className="w-3.5 h-3.5 text-indigo-400" />;
       case 'profils':
         return <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />;
       default:
-        return <Compass className="w-3.5 h-3.5 text-amber-400" />;
+        return <Compass className="w-3.5 h-3.5 text-blue-400" />;
     }
   };
 
@@ -60,10 +61,10 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({
         isAssistant ? 'justify-start' : 'justify-end'
       } my-2 animate-fade-in`}
     >
-      {/* Assistant Avatar */}
+      {/* Official Wayorbi Logo Icon Avatar for Assistant */}
       {isAssistant && (
-        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-tr from-[#E07A5F] to-[#F4A261] flex items-center justify-center text-white shadow-md shadow-[#E07A5F]/20 mt-1">
-          <Compass className="w-4 h-4 stroke-[2.2]" />
+        <div className="flex-shrink-0 mt-1 shadow-md rounded-xl overflow-hidden ring-1 ring-white/10">
+          <WayorbiLogoIcon size={34} />
         </div>
       )}
 
@@ -71,8 +72,8 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({
       <div
         className={`max-w-[85%] sm:max-w-[75%] rounded-2xl p-4 shadow-lg transition-all ${
           isAssistant
-            ? 'bg-[#151A27]/90 border border-white/10 text-slate-100 rounded-tl-sm'
-            : 'bg-gradient-to-tr from-[#253046] to-[#1E2638] border border-white/10 text-white rounded-tr-sm ml-auto'
+            ? 'bg-[#111728]/90 border border-white/10 text-slate-100 rounded-tl-sm'
+            : 'bg-gradient-to-tr from-[#1E293B] to-[#1E2235] border border-blue-500/20 text-white rounded-tr-sm ml-auto'
         }`}
       >
         {/* Header line for Assistant */}
@@ -80,7 +81,7 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({
           <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-white/5 text-xs text-slate-400">
             <span className="font-semibold text-slate-300 flex items-center gap-1.5">
               <span>Wayorbi Assistant</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
             </span>
             <span>{formattedTime}</span>
           </div>
@@ -97,14 +98,14 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({
             <button
               type="button"
               onClick={() => onOpenFeatureModal(matchedFeature.id)}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#E07A5F]/40 transition-all text-left cursor-pointer group"
+              className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-400/40 transition-all text-left cursor-pointer group"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <div className="p-1.5 rounded-lg bg-black/40">
                   {getFeatureIcon(matchedFeature.id)}
                 </div>
                 <div className="min-w-0">
-                  <div className="text-xs font-semibold text-white group-hover:text-[#F4A261] transition-colors truncate">
+                  <div className="text-xs font-semibold text-white group-hover:text-blue-300 transition-colors truncate">
                     {message.language === 'en' ? matchedFeature.nameEn : matchedFeature.nameFr}
                   </div>
                   <div className="text-[11px] text-slate-400 truncate">
@@ -127,19 +128,19 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({
                 onClick={() => (isSpeakingThis ? onStopAudio() : onPlayAudio(message))}
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-medium transition-colors cursor-pointer ${
                   isSpeakingThis
-                    ? 'bg-[#E07A5F]/20 border-[#E07A5F] text-[#F4A261]'
+                    ? 'bg-purple-500/20 border-purple-400 text-purple-300'
                     : 'bg-white/5 border-white/10 hover:bg-white/10 text-slate-300 hover:text-white'
                 }`}
                 title={isSpeakingThis ? 'Arrêter la lecture' : 'Écouter la réponse'}
               >
                 {isSpeakingThis ? (
                   <>
-                    <Square className="w-3 h-3 fill-current animate-pulse text-[#F4A261]" />
+                    <Square className="w-3 h-3 fill-current animate-pulse text-purple-400" />
                     <span>Stop</span>
                   </>
                 ) : (
                   <>
-                    <Volume2 className="w-3.5 h-3.5 text-[#F4A261]" />
+                    <Volume2 className="w-3.5 h-3.5 text-blue-400" />
                     <span>Écouter</span>
                   </>
                 )}
@@ -172,7 +173,7 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({
 
       {/* User Avatar */}
       {!isAssistant && (
-        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-700/80 border border-white/10 flex items-center justify-center text-slate-300 mt-1">
+        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-800 border border-white/10 flex items-center justify-center text-slate-300 mt-1">
           <User className="w-4 h-4" />
         </div>
       )}

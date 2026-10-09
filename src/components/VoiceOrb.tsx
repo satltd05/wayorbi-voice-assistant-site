@@ -59,12 +59,12 @@ export const VoiceOrb: React.FC<VoiceOrbProps> = ({
       <div
         className={`absolute w-72 h-72 rounded-full blur-3xl pointer-events-none transition-all duration-700 ${
           isListening
-            ? 'bg-emerald-500/20 scale-125'
+            ? 'bg-blue-500/25 scale-125'
             : isSpeaking
-            ? 'bg-[#E07A5F]/25 scale-125'
+            ? 'bg-gradient-to-tr from-blue-600/30 to-purple-600/35 scale-125'
             : isProcessing
-            ? 'bg-amber-500/20 scale-110 animate-pulse'
-            : 'bg-[#E07A5F]/10 scale-100'
+            ? 'bg-indigo-500/25 scale-110 animate-pulse'
+            : 'bg-gradient-to-r from-blue-600/15 to-purple-600/15 scale-100'
         }`}
       />
 
@@ -73,12 +73,12 @@ export const VoiceOrb: React.FC<VoiceOrbProps> = ({
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
             className={`w-40 h-40 rounded-full border animate-ping duration-1000 ${
-              isListening ? 'border-emerald-400/30' : 'border-[#F4A261]/30'
+              isListening ? 'border-sky-400/40' : 'border-purple-400/40'
             }`}
           />
           <div
             className={`w-52 h-52 rounded-full border animate-pulse duration-700 ${
-              isListening ? 'border-emerald-400/15' : 'border-[#E07A5F]/20'
+              isListening ? 'border-blue-400/20' : 'border-purple-400/20'
             }`}
           />
         </div>
@@ -90,19 +90,19 @@ export const VoiceOrb: React.FC<VoiceOrbProps> = ({
         onClick={handleClick}
         disabled={isProcessing}
         style={{ transform: `scale(${pulseScale})` }}
-        className={`relative z-10 flex items-center justify-center w-24 h-24 sm:w-28 sm:h-28 rounded-full shadow-2xl transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-[#E07A5F]/50 ${
+        className={`relative z-10 flex items-center justify-center w-24 h-24 sm:w-28 sm:h-28 rounded-full shadow-2xl transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50 ${
           isListening
-            ? 'bg-gradient-to-tr from-emerald-600 to-teal-400 shadow-emerald-500/40 text-white ring-4 ring-emerald-400/40'
+            ? 'bg-gradient-to-tr from-sky-500 to-blue-600 shadow-blue-500/50 text-white ring-4 ring-sky-300/50'
             : isSpeaking
-            ? 'bg-gradient-to-tr from-[#E07A5F] via-[#F4A261] to-[#E76F51] shadow-[#E07A5F]/50 text-white ring-4 ring-[#F4A261]/50'
+            ? 'bg-gradient-to-tr from-[#3B82F6] via-[#6366F1] to-[#A855F7] shadow-purple-500/50 text-white ring-4 ring-purple-300/50'
             : isProcessing
-            ? 'bg-gradient-to-tr from-slate-800 to-slate-700 shadow-slate-900/50 text-slate-300 ring-2 ring-white/10'
-            : 'bg-gradient-to-tr from-[#1E2538] via-[#2A344D] to-[#1E2538] hover:from-[#252F48] hover:to-[#222B40] text-[#F4A261] hover:text-white border border-white/10 hover:border-[#E07A5F]/50 shadow-black/60 hover:shadow-[#E07A5F]/25'
+            ? 'bg-gradient-to-tr from-slate-900 to-indigo-950 shadow-indigo-900/50 text-slate-300 ring-2 ring-white/10'
+            : 'bg-gradient-to-tr from-[#121829] via-[#1A223B] to-[#141B30] hover:from-[#1A233D] hover:to-[#222E54] text-blue-400 hover:text-white border border-blue-500/30 hover:border-blue-400 shadow-[0_12px_36px_rgba(59,130,246,0.18)] hover:shadow-[0_16px_40px_rgba(99,102,241,0.3)]'
         }`}
         aria-label={getStatusText()}
       >
         {isProcessing ? (
-          <Loader2 className="w-9 h-9 sm:w-10 sm:h-10 animate-spin text-[#F4A261]" />
+          <Loader2 className="w-9 h-9 sm:w-10 sm:h-10 animate-spin text-blue-400" />
         ) : isSpeaking ? (
           <div className="flex flex-col items-center">
             <Square className="w-8 h-8 sm:w-9 sm:h-9 fill-current" />
@@ -113,7 +113,7 @@ export const VoiceOrb: React.FC<VoiceOrbProps> = ({
         ) : (
           <div className="relative">
             <Mic className="w-10 h-10 sm:w-11 sm:h-11 transition-transform group-hover:scale-110" />
-            <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#E07A5F] ring-2 ring-[#0C0F17]" />
+            <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 ring-2 ring-[#0A0D18]" />
           </div>
         )}
       </button>
@@ -123,13 +123,13 @@ export const VoiceOrb: React.FC<VoiceOrbProps> = ({
         {micError ? (
           <AlertCircle className="w-4 h-4 text-rose-400" />
         ) : isProcessing ? (
-          <Sparkles className="w-4 h-4 text-amber-400 animate-spin" />
+          <Sparkles className="w-4 h-4 text-purple-400 animate-spin" />
         ) : isListening ? (
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+          <span className="w-2 h-2 rounded-full bg-sky-400 animate-ping" />
         ) : isSpeaking ? (
-          <span className="w-2 h-2 rounded-full bg-[#F4A261] animate-bounce" />
+          <span className="w-2 h-2 rounded-full bg-purple-400 animate-bounce" />
         ) : (
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+          <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
         )}
 
         <span
@@ -137,11 +137,11 @@ export const VoiceOrb: React.FC<VoiceOrbProps> = ({
             micError
               ? 'text-rose-400'
               : isListening
-              ? 'text-emerald-400 font-semibold'
+              ? 'text-sky-300 font-semibold'
               : isSpeaking
-              ? 'text-[#F4A261] font-semibold'
+              ? 'text-purple-300 font-semibold'
               : isProcessing
-              ? 'text-amber-300'
+              ? 'text-indigo-300'
               : 'text-slate-400'
           }`}
         >

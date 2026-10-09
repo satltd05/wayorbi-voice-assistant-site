@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { X, Dna, BookOpen, Search, MessageCircle, ShieldCheck, Compass, CheckCircle2, MessageSquarePlus } from 'lucide-react';
+import { X, Dna, BookOpen, Search, MessageCircle, ShieldCheck, CheckCircle2, MessageSquarePlus, Compass } from 'lucide-react';
 import { WAYORBI_FEATURES, WayorbiFeature } from '../data/wayorbiKnowledge';
 import { SupportedLanguage } from '../types/assistant';
+import { WayorbiLogoIcon, WayorbiWordmark } from './WayorbiLogo';
 
 interface WayorbiFeatureModalProps {
   isOpen: boolean;
@@ -37,17 +38,17 @@ export const WayorbiFeatureModal: React.FC<WayorbiFeatureModalProps> = ({
   const getIcon = (id: string) => {
     switch (id) {
       case 'travel-dna':
-        return <Dna className="w-4 h-4 text-[#E07A5F]" />;
+        return <Dna className="w-4 h-4 text-purple-400" />;
       case 'carnets':
-        return <BookOpen className="w-4 h-4 text-[#F4A261]" />;
+        return <BookOpen className="w-4 h-4 text-blue-400" />;
       case 'explorer':
-        return <Search className="w-4 h-4 text-[#2A9D8F]" />;
+        return <Search className="w-4 h-4 text-sky-400" />;
       case 'messagerie':
-        return <MessageCircle className="w-4 h-4 text-sky-400" />;
+        return <MessageCircle className="w-4 h-4 text-indigo-400" />;
       case 'profils':
         return <ShieldCheck className="w-4 h-4 text-emerald-400" />;
       default:
-        return <Compass className="w-4 h-4 text-amber-400" />;
+        return <Compass className="w-4 h-4 text-blue-400" />;
     }
   };
 
@@ -58,18 +59,21 @@ export const WayorbiFeatureModal: React.FC<WayorbiFeatureModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-md animate-fade-in">
-      <div className="relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-3xl bg-[#0E121E] border border-white/10 shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-md animate-fade-in">
+      <div className="relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-3xl bg-[#0B0F19] border border-white/10 shadow-2xl overflow-hidden">
         {/* Modal Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#141A28]">
-          <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-gradient-to-tr from-[#E07A5F] to-[#F4A261] text-white">
-              <Compass className="w-4 h-4" />
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#101626]">
+          <div className="flex items-center gap-3">
+            <div className="shadow-md rounded-xl overflow-hidden ring-1 ring-white/15">
+              <WayorbiLogoIcon size={38} />
             </div>
             <div>
-              <h2 className="text-base sm:text-lg font-bold text-white font-['Playfair_Display',serif]">
-                {language === 'en' ? 'Wayorbi Ecosystem Guide' : 'Guide de l’application Wayorbi'}
-              </h2>
+              <div className="flex items-center gap-2">
+                <WayorbiWordmark size="sm" />
+                <span className="text-sm font-semibold text-slate-300">
+                  {language === 'en' ? 'Ecosystem Guide' : 'Guide Officiel'}
+                </span>
+              </div>
               <p className="text-xs text-slate-400">
                 {language === 'en'
                   ? 'Explore the core features of the travel social network'
@@ -90,7 +94,7 @@ export const WayorbiFeatureModal: React.FC<WayorbiFeatureModalProps> = ({
         {/* Modal Body */}
         <div className="flex-1 overflow-y-auto flex flex-col md:flex-row">
           {/* Sidebar Tabs */}
-          <div className="w-full md:w-72 border-b md:border-b-0 md:border-r border-white/10 p-3 sm:p-4 bg-[#111624] space-y-1.5 flex-shrink-0">
+          <div className="w-full md:w-72 border-b md:border-b-0 md:border-r border-white/10 p-3 sm:p-4 bg-[#0E1322] space-y-1.5 flex-shrink-0">
             <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2 py-1">
               {language === 'en' ? 'Core Features' : 'Fonctionnalités clés'}
             </div>
@@ -105,13 +109,13 @@ export const WayorbiFeatureModal: React.FC<WayorbiFeatureModalProps> = ({
                   onClick={() => setSelectedFeatureId(feature.id)}
                   className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-gradient-to-r from-[#E07A5F]/20 to-[#F4A261]/10 text-white border border-[#E07A5F]/40 shadow-sm'
+                      ? 'bg-gradient-to-r from-blue-600/20 to-purple-600/15 text-white border border-blue-400/40 shadow-sm'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-white/5 border border-transparent'
                   }`}
                 >
                   <div
                     className={`p-1.5 rounded-lg ${
-                      isSelected ? 'bg-[#E07A5F] text-white' : 'bg-black/40'
+                      isSelected ? 'bg-gradient-to-tr from-blue-500 to-indigo-600 text-white' : 'bg-black/40'
                     }`}
                   >
                     {getIcon(feature.id)}
@@ -125,7 +129,7 @@ export const WayorbiFeatureModal: React.FC<WayorbiFeatureModalProps> = ({
           {/* Active Feature Detail View */}
           <div className="flex-1 p-6 space-y-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#E07A5F]/15 border border-[#E07A5F]/30 text-xs font-semibold text-[#F4A261] mb-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-500/15 to-purple-500/15 border border-blue-400/30 text-xs font-semibold text-blue-300 mb-2">
                 {getIcon(currentFeature.id)}
                 <span>
                   {language === 'en' ? currentFeature.nameEn : currentFeature.nameFr}
@@ -149,7 +153,7 @@ export const WayorbiFeatureModal: React.FC<WayorbiFeatureModalProps> = ({
                 {(language === 'en' ? currentFeature.bulletsEn : currentFeature.bulletsFr).map(
                   (bullet, idx) => (
                     <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-200">
-                      <CheckCircle2 className="w-4 h-4 text-[#F4A261] flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
                       <span>{bullet}</span>
                     </li>
                   )
@@ -158,9 +162,9 @@ export const WayorbiFeatureModal: React.FC<WayorbiFeatureModalProps> = ({
             </div>
 
             {/* Action Card: Ask the assistant */}
-            <div className="p-4 rounded-2xl bg-gradient-to-r from-[#172033] to-[#1F273D] border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg">
+            <div className="p-4 rounded-2xl bg-gradient-to-r from-[#121A2F] to-[#181C35] border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg">
               <div>
-                <div className="text-xs font-semibold text-slate-300">
+                <div className="text-xs font-semibold text-slate-200">
                   {language === 'en'
                     ? 'Curious to explore this with the voice assistant?'
                     : 'Envie d’approfondir avec l’assistant vocal ?'}
@@ -173,7 +177,7 @@ export const WayorbiFeatureModal: React.FC<WayorbiFeatureModalProps> = ({
               <button
                 type="button"
                 onClick={() => handleAskPrompt(currentFeature)}
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#E07A5F] to-[#F4A261] text-white text-xs font-semibold shadow-md shadow-[#E07A5F]/20 hover:opacity-95 transition-all cursor-pointer whitespace-nowrap"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-[#3B82F6] via-[#6366F1] to-[#A855F7] text-white text-xs font-semibold shadow-md shadow-blue-500/25 hover:opacity-95 transition-all cursor-pointer whitespace-nowrap"
               >
                 <MessageSquarePlus className="w-3.5 h-3.5" />
                 <span>{language === 'en' ? 'Ask Assistant' : 'Poser la question'}</span>

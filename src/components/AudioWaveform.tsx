@@ -44,9 +44,9 @@ export const AudioWaveform: React.FC<AudioWaveformProps> = ({
           key={idx}
           className={`w-1 rounded-full transition-all duration-75 ${
             isSpeaking
-              ? 'bg-gradient-to-t from-[#E07A5F] to-[#F4A261]'
+              ? 'bg-gradient-to-t from-[#6366F1] to-[#A855F7]'
               : isActive
-              ? 'bg-gradient-to-t from-[#2A9D8F] to-[#52B788]'
+              ? 'bg-gradient-to-t from-[#38BDF8] to-[#3B82F6]'
               : 'bg-white/15'
           }`}
           style={{

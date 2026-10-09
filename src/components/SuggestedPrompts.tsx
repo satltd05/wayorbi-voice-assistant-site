@@ -24,7 +24,7 @@ const SUGGESTIONS: Suggestion[] = [
     textEn: 'What is Travel DNA and how does it work?',
     categoryFr: 'Recommandations',
     categoryEn: 'Smart Matching',
-    icon: <Dna className="w-3.5 h-3.5 text-[#E07A5F]" />,
+    icon: <Dna className="w-3.5 h-3.5 text-purple-400" />,
   },
   {
     id: 'carnet',
@@ -32,7 +32,7 @@ const SUGGESTIONS: Suggestion[] = [
     textEn: 'How do I create a travel journal with my route?',
     categoryFr: 'Carnets',
     categoryEn: 'Journals',
-    icon: <BookOpen className="w-3.5 h-3.5 text-[#F4A261]" />,
+    icon: <BookOpen className="w-3.5 h-3.5 text-blue-400" />,
   },
   {
     id: 'explorer',
@@ -40,7 +40,7 @@ const SUGGESTIONS: Suggestion[] = [
     textEn: 'How does the Explorer hub help me find trips by budget?',
     categoryFr: 'Explorer',
     categoryEn: 'Discovery',
-    icon: <Search className="w-3.5 h-3.5 text-[#2A9D8F]" />,
+    icon: <Search className="w-3.5 h-3.5 text-sky-400" />,
   },
   {
     id: 'intro',
@@ -48,7 +48,7 @@ const SUGGESTIONS: Suggestion[] = [
     textEn: 'Introduce Wayorbi in 3 essential points.',
     categoryFr: 'Découverte',
     categoryEn: 'Overview',
-    icon: <Compass className="w-3.5 h-3.5 text-amber-400" />,
+    icon: <Compass className="w-3.5 h-3.5 text-indigo-400" />,
   },
   {
     id: 'privacy',
@@ -68,7 +68,7 @@ export const SuggestedPrompts: React.FC<SuggestedPromptsProps> = ({
   return (
     <div className="w-full my-3">
       <div className="flex items-center gap-1.5 mb-2 px-1 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-        <Sparkles className="w-3 h-3 text-[#F4A261]" />
+        <Sparkles className="w-3 h-3 text-purple-400" />
         <span>{language === 'en' ? 'Quick Questions' : 'Questions Fréquentes'}</span>
       </div>
 
@@ -83,9 +83,9 @@ export const SuggestedPrompts: React.FC<SuggestedPromptsProps> = ({
               type="button"
               disabled={disabled}
               onClick={() => onSelectPrompt(text)}
-              className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 active:bg-white/15 border border-white/10 hover:border-[#E07A5F]/40 text-left transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 active:bg-white/15 border border-white/10 hover:border-blue-400/40 text-left transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
-              <div className="p-1 rounded-lg bg-black/30 group-hover:bg-[#E07A5F]/15 transition-colors">
+              <div className="p-1 rounded-lg bg-black/40 group-hover:bg-blue-500/15 transition-colors">
                 {item.icon}
               </div>
               <div className="flex flex-col">

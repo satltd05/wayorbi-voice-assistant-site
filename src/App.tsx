@@ -197,7 +197,12 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col h-screen max-h-screen bg-[#0A0D14] text-slate-100 overflow-hidden select-none font-['Plus_Jakarta_Sans',sans-serif]">
+    <div className="relative flex flex-col h-screen max-h-screen bg-[#080B14] text-slate-100 overflow-hidden select-none font-['Plus_Jakarta_Sans',sans-serif]">
+      {/* Background ambient decorative glow matching Wayorbi logo colors */}
+      <div className="absolute top-0 -left-40 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 -right-40 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none" />
+
       {/* App Header */}
       <Header
         language={language}

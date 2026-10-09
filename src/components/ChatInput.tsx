@@ -39,7 +39,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative w-full max-w-4xl mx-auto flex items-center gap-2 p-1.5 sm:p-2 bg-[#121724]/90 border border-white/10 rounded-2xl backdrop-blur-xl shadow-2xl focus-within:border-[#E07A5F]/50 transition-all"
+      className="relative w-full max-w-4xl mx-auto flex items-center gap-2 p-1.5 sm:p-2 bg-[#101524]/90 border border-white/10 rounded-2xl backdrop-blur-xl shadow-2xl focus-within:border-blue-500/50 transition-all"
     >
       {/* Microphone quick tap button */}
       <button
@@ -48,8 +48,8 @@ export const ChatInput: React.FC<ChatInputProps> = ({
         disabled={isProcessing}
         className={`p-2.5 rounded-xl transition-all cursor-pointer ${
           isListening
-            ? 'bg-emerald-500 text-white animate-pulse'
-            : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-[#F4A261]'
+            ? 'bg-sky-500 text-white animate-pulse'
+            : 'bg-white/5 hover:bg-white/10 text-slate-300 hover:text-blue-300'
         }`}
         title={
           language === 'en'
@@ -80,7 +80,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
       <button
         type="submit"
         disabled={!inputValue.trim() || isProcessing}
-        className="p-2.5 rounded-xl bg-gradient-to-tr from-[#E07A5F] to-[#F4A261] text-white shadow-md shadow-[#E07A5F]/20 hover:opacity-90 active:scale-95 disabled:opacity-30 disabled:scale-100 disabled:cursor-not-allowed transition-all cursor-pointer"
+        className="p-2.5 rounded-xl bg-gradient-to-tr from-[#3B82F6] via-[#6366F1] to-[#A855F7] text-white shadow-md shadow-blue-500/25 hover:opacity-90 active:scale-95 disabled:opacity-30 disabled:scale-100 disabled:cursor-not-allowed transition-all cursor-pointer"
         title={language === 'en' ? 'Send' : 'Envoyer'}
       >
         <Send className="w-4 h-4" />
