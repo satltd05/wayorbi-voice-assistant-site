@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { SYSTEM_PROMPT_KNOWLEDGE } from './src/data/wayorbiKnowledge.ts';
 
 dotenv.config();
@@ -14,6 +15,13 @@ const app = express();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
 app.use(express.json({ limit: '10mb' }));
+
+// Supabase client initialization (official SDK)
+const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '';
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
+const supabase: SupabaseClient | null = (supabaseUrl && supabaseAnonKey)
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 // Shared Gemini client with telemetry header
 const ai = new GoogleGenAI({
@@ -82,8 +90,61 @@ app.get('/api/health', (req: Request, res: Response) => {
     status: 'ok',
     appName: 'Wayorbi Voice Assistant API',
     geminiKeyConfigured: Boolean(process.env.GEMINI_API_KEY),
+    supabaseConfigured: Boolean(supabase),
     timestamp: new Date().toISOString(),
   });
+});
+
+// Supabase connection & status test endpoint
+app.get('/api/supabase/status', async (req: Request, res: Response) => {
+  if (!supabase) {
+    return res.status(200).json({
+      connected: false,
+      configured: false,
+      message: 'Supabase n’est pas encore configuré (SUPABASE_URL et SUPABASE_ANON_KEY manquants dans .env).',
+    });
+  }
+
+  try {
+    // Perform a lightweight check
+    const { error: sessionError } = await supabase.auth.getSession();
+    if (sessionError) {
+      return res.status(200).json({
+        connected: false,
+        configured: true,
+        error: sessionError.message,
+      });
+    }
+
+    // Optional query test if table name provided
+    const tableName = req.query.table as string | undefined;
+    let tableData: any = null;
+    let tableError: string | null = null;
+
+    if (tableName) {
+      const { data, error } = await supabase.from(tableName).select('*').limit(5);
+      if (error) {
+        tableError = error.message;
+      } else {
+        tableData = data;
+      }
+    }
+
+    return res.status(200).json({
+      connected: true,
+      configured: true,
+      projectUrl: supabaseUrl,
+      tableData,
+      tableError,
+      message: 'Connexion à Supabase établie avec succès !',
+    });
+  } catch (err: any) {
+    return res.status(500).json({
+      connected: false,
+      configured: true,
+      error: err?.message || 'Erreur lors du test de connexion Supabase.',
+    });
+  }
 });
 
 // Assistant conversation endpoint
